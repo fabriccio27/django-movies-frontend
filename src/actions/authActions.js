@@ -31,7 +31,7 @@ export const fetchUser = (userInfo) => dispatch => {
     //QUE PASA SI LAS CREDENCIALES SON INVALIDAS?
 }
 
-export const registerUser = (userInfo) => dispatch => {
+/* export const registerUser = (userInfo) => dispatch => {
     fetch(`http://localhost:4000/users`, {
         method: "POST",
         headers: {
@@ -50,4 +50,4 @@ export const registerUser = (userInfo) => dispatch => {
         localStorage.setItem("token", data.token)
         dispatch(setUser(data.user))
     })
-}
+} */

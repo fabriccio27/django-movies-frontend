@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const MovieCard = ({movie})=>{
     return(
         <div>
-            <h2>{movie.title}</h2>
+            <Link to={`/movies/${movie.id}`}><h2>{movie.title}</h2></Link>
             <p>{movie.average_rating}</p>
             {/* <a href={`/ratings/${movie.id}`}>Ratings</a> */}
             <Link to={`/ratings/${movie.id}/`}>Ratings</Link>
