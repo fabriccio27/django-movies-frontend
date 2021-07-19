@@ -15,3 +15,7 @@ code {
 .selected {
   font-weight: bolder;
 }
+
+.review-form {
+  width:60%;
+}

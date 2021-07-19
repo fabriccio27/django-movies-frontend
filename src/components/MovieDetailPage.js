@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
+import StarBorderIcon from '@material-ui/icons/StarBorder';
 
 const MovieDetailPage = ({isAuthenticated, match})=>{
 
@@ -21,7 +22,7 @@ const MovieDetailPage = ({isAuthenticated, match})=>{
         return ()=>{
             abortController.abort();
         }
-    },[]);
+    },);
 
     function isEmpty(obj) {
         for(var key in obj) {
@@ -36,7 +37,7 @@ const MovieDetailPage = ({isAuthenticated, match})=>{
     }
     return(
         <div>
-            <h1>{movie.title}</h1><span>{movie.average_rating}</span>
+            <h1>{movie.title}</h1><span>{movie.average_rating} <StarBorderIcon/></span>
             <h2>Release date: {movie.release}</h2>
             <p>Genre: {movie.genre.charAt(0).toUpperCase() + movie.genre.slice(1)}</p>
             <p>{movie.plot}</p>

@@ -42,7 +42,7 @@ class LoginPage extends React.Component {
                     />
                     <input type="submit" value="Log In"/>
                 </form>
-                <button onClick={this.handleLogOut}>Log Out</button>
+                {/* <button onClick={this.handleLogOut}>Log Out</button> */}
             </div>
             
         )

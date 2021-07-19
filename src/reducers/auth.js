@@ -3,7 +3,7 @@ const defaultState = {
     user_info:{}
 }
 
-export default (state = defaultState, action) =>{
+const authReducer = (state = defaultState, action) =>{
     switch (action.type){
         case "LOGIN":
             return {
@@ -20,3 +20,5 @@ export default (state = defaultState, action) =>{
             return state;
     }
 };
+
+export default authReducer;

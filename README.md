@@ -1,23 +1,26 @@
 # Plan
-- check if I can retrieve data from django backend API
+- check if I can retrieve/push data from django backend API
     - GET request for movie list.
-    - POST request to add movie with valid credentials
+    - POST request to register user.
+    - POST request to add movie review with valid credentials
 - think about how the state will be configured
     - token
-    - movie list
+    - ~~movie list~~
     - user id
-- think how many 'pages' will be needed
+- think how many 'pages' will be needed.
 - build card component or something to display movie information.
 - build component to display review about movie.
 
 ## Advances
-* installed react-router-dom 
+* installed react-router-dom. 
+* installed react-redux and redux-thunk.
 * added AbortController to cancel fetch call when unmounting components
-* succesfully retrieved movie list
+* succesfully retrieved movie list.
 * successfully made post request to token auth endpoint and set state
 * successfully dispatched action to clear state
 * successfully incorporated AppRouter
 * successfully added header/navbar
+* successfully retrieved movie details.
 
 
 ## Available Scripts
