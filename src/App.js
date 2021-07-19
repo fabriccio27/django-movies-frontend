@@ -1,6 +1,10 @@
 import React from "react";
 import './App.css';
 
+/* aca al AppRouter lo envolvia en el provider de redux, y a eso le hacia ReactDOM.render  */
+
+
+
 class App extends React.Component {
   constructor(props){
     super(props);

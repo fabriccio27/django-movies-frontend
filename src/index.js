@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import LoginPage from "./components/LoginPage"
+
+import { Provider } from 'react-redux';
+import store from "./store/configureStore"
+
+import MovieDashboardPage from './components/MoviesDashboardPage';
+import AppRouter from "./routers/AppRouter"
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store()}>
+    <AppRouter />
+  </Provider>,
   document.getElementById('root')
 );
 

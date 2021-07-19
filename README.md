@@ -14,6 +14,8 @@
 * installed react-router-dom 
 * added AbortController to cancel fetch call when unmounting components
 * succesfully retrieved movie list
+* successfully made post request to token auth endpoint and set state
+* successfully dispatched action to clear state
 
 
 ## Available Scripts
