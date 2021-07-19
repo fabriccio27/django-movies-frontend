@@ -10,11 +10,13 @@ class MovieRatingPage extends React.Component {
     state = {
         movie_id:this.props.match.params["movieId"],
         movie:{},
-        ratings:[]
+        ratings:[],
+        needToRefresh:false
     }
+
     abortController = new AbortController();
+
     componentDidMount(){
-        
         console.log("Componente movierating montado");
         Promise.all([
             fetch(`http://localhost:8000/api/movies/${this.state.movie_id}/ratings/`, {signal:this.abortController.signal}).then(res=>res.json()),
@@ -31,13 +33,18 @@ class MovieRatingPage extends React.Component {
         .catch(err=>console.log(`This happened while trying to fetch movie ratings: ${err}`))    
     }
 
-    toggleShowForm = () =>{
-        console.log("toggleando como un campeon")
+    activateRefresh(){
+        this.setState(()=>({
+            needToRefresh:true
+        }));
     }
+    
     componentWillUnmount(){
-        console.log("Componente desmontado");
-        this.abortController.abort()
+        console.log("Componente movierating desmontado");
+        this.abortController.abort();
     }
+
+
     render(){
         let rating_components = [];
         if (this.state.ratings.length!==0){
@@ -52,7 +59,7 @@ class MovieRatingPage extends React.Component {
             <div>
                 <h1>Reviews for {this.state.movie.title}</h1>
                 {/* <button onClick={this.toggleShowForm}>Write your review</button> */}
-                {this.props.isAuthenticated?(<RatingForm movieId={this.state.movie_id}/>):(<h2>Log in to write a review</h2>)}
+                {this.props.isAuthenticated?(<RatingForm movieId={this.state.movie_id} activateRefresh={this.activateRefresh}/>):(<h2>Log in to write a review</h2>)}
                 {this.state.ratings.length===0?(no_components):(rating_components)}
             </div>
         )

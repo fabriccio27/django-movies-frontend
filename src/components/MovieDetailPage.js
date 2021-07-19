@@ -1,30 +1,64 @@
-import React, {useEffect, useState} from "react";
-import { connect } from "react-redux";
+import React from "react";
+import {connect} from "react-redux";
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 
-const MovieDetailPage = ({isAuthenticated, match})=>{
-
-    const [movie, setMovie] = useState({});
-    /* si no existe me da {"detail": "Not found."} */
-    useEffect(()=>{
-        const movieId = match.params["movieId"];
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-        const url = `http://localhost:8000/api/movies/${movieId}/`;
-
-        fetch(url, {signal:signal})
+class MovieDetailPage extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            movieId: this.props.match.params["movieId"],
+            movie:{},
+            error:"",
+            addedToWl:false,
+        }
+    }
+    abortController = new AbortController();
+    componentDidMount(){
+        console.log("componente MovieDetail montado.")
+        const url = `http://localhost:8000/api/movies/${this.state.movieId}/`;
+        fetch(url, {signal:this.abortController.signal})
         .then(res=>res.json())
         .then(data=>{
-            setMovie(data);
+            if (data.hasOwnProperty("title")){
+                this.setState(()=>({
+                    movie:data
+                }));
+            }else{
+                this.setState(()=>({
+                    movie:{error:"Not Found"},
+                    error:data.detail
+                }))
+            }
+            
         })
         .catch(err=>console.log(`This happened while trying to fetch movie details: ${err}`))
-
-        return ()=>{
-            abortController.abort();
-        }
-    },);
-
-    function isEmpty(obj) {
+    }
+    /* si no existe me da {"detail": "Not found."} */
+    
+    componentWillUnmount(){
+        console.log("componente MovieDetail desmontado.")
+        this.abortController.abort()
+    }
+    handleAddToWl(){
+        const url = `http://localhost:8000/api/users/${this.props.currentUserId}/watchlist/`;
+        fetch(url, {signal:this.abortController.signal},{
+            method:"POST",
+            headers:{
+                "Content-Type": "application/json",
+                "Accept":"application/json",
+                "Authorization":`Token ${localStorage.getItem("token")}`
+            },
+            body:JSON.stringify({
+                movie_id:this.state.movieId
+            })
+        })
+        .then(resp=>resp.json())
+        .then(data=>{
+            console.log(data);
+        })
+        .catch(err=>console.log(`This happened while trying to add to watchlist: ${err}`))
+    }
+    isEmpty(obj) {
         for(var key in obj) {
             if(obj.hasOwnProperty(key))
                 return false;
@@ -32,17 +66,32 @@ const MovieDetailPage = ({isAuthenticated, match})=>{
         return true;
     }
 
-    if (isEmpty(movie)) {
-        return <h1>Fetching movie data...</h1>
+    
+    render(){
+        if (this.isEmpty(this.state.movie)) {
+            return <h2>Fetching movie data...</h2>
+        } else if (this.state.error){
+            return <h2>Not Found</h2>
+        }
+        return(
+            <div>
+                <h1>{this.state.movie.title}</h1><span>{this.state.movie.average_rating} <StarBorderIcon/></span>
+                {this.props.isAuthenticated && <button className="btn btn-pri" onClick={this.handleAddToWl}>Add to Watchlist</button>}
+                <h2>Release date: {this.state.movie.release}</h2>
+                <p>Genre: {this.state.movie.genre.charAt(0).toUpperCase() + this.state.movie.genre.slice(1)}</p>
+                <p>{this.state.movie.plot}</p>
+            </div>
+        )
+
     }
-    return(
-        <div>
-            <h1>{movie.title}</h1><span>{movie.average_rating} <StarBorderIcon/></span>
-            <h2>Release date: {movie.release}</h2>
-            <p>Genre: {movie.genre.charAt(0).toUpperCase() + movie.genre.slice(1)}</p>
-            <p>{movie.plot}</p>
-        </div>
-    )
+    
 }
 
-export default MovieDetailPage;
+const mapStateToProps = (state) =>{
+    return {
+        isAuthenticated: state.auth.isAuthenticated,
+        currentUserId: state.auth.user_info["user_id"]
+    }
+}
+
+export default connect(mapStateToProps)(MovieDetailPage);

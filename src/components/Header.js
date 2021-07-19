@@ -3,11 +3,11 @@ import {NavLink} from "react-router-dom";
 import {logUserOut} from "../actions/authActions";
 import {connect} from "react-redux";
 
-export const Header = ({isAuthenticated, logUserOut}) => (
+export const Header = ({isAuthenticated, logUserOut, userId}) => (
     <header>
         <nav>
             <NavLink to="/dashboard" activeClassName="selected">Home</NavLink>
-            {isAuthenticated && <NavLink to="/watchlist/:userId" activeClassName="selected">Watchlist</NavLink>}
+            {isAuthenticated && <NavLink to={`/watchlist/${userId}`} activeClassName="selected">Watchlist</NavLink>}
             {isAuthenticated && <button onClick={()=>logUserOut()}>Log Out</button>}
             {!isAuthenticated && <NavLink to="/login" activeClassName="selected">Login</NavLink>}
             {!isAuthenticated && <NavLink to="/register" activeClassName="selected">Register</NavLink>}
@@ -24,7 +24,8 @@ const mapDispatchToProps = (dispatch)=>{
 
 const mapStateToProps = (state) =>{
     return {
-        isAuthenticated:state.auth.isAuthenticated
+        isAuthenticated:state.auth.isAuthenticated,
+        userId:state.auth.user_info["user_id"]
     }
 }
 

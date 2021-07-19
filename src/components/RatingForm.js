@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 
-const RatingForm = ({movieId})=>{
+const RatingForm = ({movieId, activateRefresh})=>{
     const [rating, setRating] =  useState(3);
     const [comment, setComment] = useState("");
+    const [success, setSuccess] = useState(false);
+    console.log(activateRefresh);
 
     const handleOnSubmit=(ev)=>{
         ev.preventDefault();
@@ -21,8 +23,11 @@ const RatingForm = ({movieId})=>{
                 comment
             })
         })
-        .then(res=>res.json())
-        .then(data=>console.log(data))
+        .then(res=>res.json()) /* si es exitoso devuelve la info completa de la review, userid, movieid, etc. */
+        .then(data=>{
+            console.log(data);
+            setSuccess(true);
+        })
         .catch(err=>{
             console.log(`This happened while trying to create review: ${err}`);
         });
@@ -35,19 +40,24 @@ const RatingForm = ({movieId})=>{
     const handleRatingChange=(ev)=>{
         setRating(parseInt(ev.target.value))
     }
+    
+    if(success){
+        return <h2>Great! we received your review.</h2>
+    }
+
     return(
         <form onSubmit={handleOnSubmit} className="review-form">
             <div className="form-group col-2" >
-                <label for="ratingField">Rating</label>
+                <label htmlFor="ratingField">Rating</label>
                 <input type="number" value={rating} onChange={handleRatingChange} min={1} max={5} id="ratingField" className="form-control"/>
                 <small className="form-text text-muted">1 to 5 stars</small>
             </div>
             <div className="form-group">
-                <label for="commentField">Review</label>
+                <label htmlFor="commentField">Review</label>
                 <textarea 
                     value={comment} 
                     onChange={handleOnCommentChange} 
-                    maxlength={500} 
+                    maxLength={500} 
                     placeholder="Did you like it?"
                     rows={10} 
                     cols={40} 

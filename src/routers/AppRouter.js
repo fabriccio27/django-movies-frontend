@@ -27,7 +27,7 @@ const AppRouter = () =>(
                 <Route path="/dashboard" component={MoviesDashboardPage}/>
                 <Route path="/movies/:movieId/" component={MovieDetailPage}/>
                 <Route path="/ratings/:movieId/" component={MovieRatingPage}/>
-                <Route path="/watchlist/:userId/" component={WatchlistPage}/>
+                <Route path="/watchlist/:userId" component={WatchlistPage}/>
                 <PublicRoute exact={true} path="/register/" component={RegisterPage}/>
                 <PublicRoute exact={true} path="/login/" component={LoginPage}/>
                 {/* <PrivateRoute exact={true} path="/create" component={AddExpensePage} />
