@@ -1,5 +1,5 @@
 import React from "react";
-import {Router, Route, Switch, Link, Redirect} from "react-router-dom";
+import {Router, Route, Switch, Redirect} from "react-router-dom";
 
 import Header from "../components/Header.js"; //header lo voy a mostrar dependiendo de las rutas, por eso lo muevo a PrivateRoute
 import MoviesDashboardPage from "../components/MoviesDashboardPage";
@@ -21,18 +21,10 @@ const AppRouter = () =>(
 
     <Router history={history}>
         <div>
-            {/* <header>
-                <nav>
-                    <Link to="/dashboard">Home</Link>
-                    <Link to="/watchlist/:userId">Watchlist</Link>
-                    <Link to="/login">Login</Link>
-                    <Link to="/register">Register</Link>
-                </nav>
-            </header> */}
             <Header/>
             <Switch>
-                <Route exact={true} path="/" component={()=><Redirect to="/dashboard"/>}/>
-                <Route exact={true} path="/dashboard/" component={MoviesDashboardPage}/>
+                <Route exact={true} path="/"><Redirect to="/dashboard"/></Route>
+                <Route path="/dashboard" component={MoviesDashboardPage}/>
                 <Route path="/movies/:movieId/" component={MovieDetailPage}/>
                 <Route path="/ratings/:movieId/" component={MovieRatingPage}/>
                 <Route path="/watchlist/:userId/" component={WatchlistPage}/>

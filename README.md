@@ -17,6 +17,7 @@
 * successfully made post request to token auth endpoint and set state
 * successfully dispatched action to clear state
 * successfully incorporated AppRouter
+* successfully added header/navbar
 
 
 ## Available Scripts

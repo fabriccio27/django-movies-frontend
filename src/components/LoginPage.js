@@ -14,17 +14,18 @@ class LoginPage extends React.Component {
         }))
     }
 
-    onSubmit = (e) => {
+    handleOnSubmit = (e) => {
         e.preventDefault()
         this.props.fetchUser(this.state)
     }
-    handleLogOut = ()=>{
+    handleLogOut = () =>{
         this.props.logUserOut()
     }
     render(){
+
         return(
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.handleOnSubmit}>
                     <input 
                         type="text" 
                         placeholder="Username" 

@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import LoginPage from "./components/LoginPage"
 
+import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from "./store/configureStore"
 
-import MovieDashboardPage from './components/MoviesDashboardPage';
 import AppRouter from "./routers/AppRouter"
 
 ReactDOM.render(
