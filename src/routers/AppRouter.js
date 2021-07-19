@@ -1,9 +1,11 @@
 import React from "react";
-import {Router, Route, Switch, Link} from "react-router-dom";
+import {Router, Route, Switch, Link, Redirect} from "react-router-dom";
 
-//import Header from "../components/Header.js"; header lo voy a mostrar dependiendo de las rutas, por eso lo muevo a PrivateRoute
+import Header from "../components/Header.js"; //header lo voy a mostrar dependiendo de las rutas, por eso lo muevo a PrivateRoute
 import MoviesDashboardPage from "../components/MoviesDashboardPage";
 import MovieRatingPage from "../components/MovieRatingPage";
+import MovieDetailPage from "../components/MovieDetailPage";
+import WatchlistPage from "../components/WatchlistPage";
 import NotFoundPage from "../components/NotFoundPage";
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
@@ -19,17 +21,21 @@ const AppRouter = () =>(
 
     <Router history={history}>
         <div>
-            <header>
+            {/* <header>
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link to="/dashboard">Home</Link>
+                    <Link to="/watchlist/:userId">Watchlist</Link>
                     <Link to="/login">Login</Link>
                     <Link to="/register">Register</Link>
                 </nav>
-            </header>
-            
+            </header> */}
+            <Header/>
             <Switch>
-                <PublicRoute exact={true} path="/" component={MoviesDashboardPage}/>
-                <PublicRoute path="/ratings/:movieId/" component={MovieRatingPage}/>
+                <Route exact={true} path="/" component={()=><Redirect to="/dashboard"/>}/>
+                <Route exact={true} path="/dashboard/" component={MoviesDashboardPage}/>
+                <Route path="/movies/:movieId/" component={MovieDetailPage}/>
+                <Route path="/ratings/:movieId/" component={MovieRatingPage}/>
+                <Route path="/watchlist/:userId/" component={WatchlistPage}/>
                 <PublicRoute exact={true} path="/register/" component={RegisterPage}/>
                 <PublicRoute exact={true} path="/login/" component={LoginPage}/>
                 {/* <PrivateRoute exact={true} path="/create" component={AddExpensePage} />

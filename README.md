@@ -7,8 +7,8 @@
     - movie list
     - user id
 - think how many 'pages' will be needed
-- build card component or something to display movie information
-- build component to display review about movie
+- build card component or something to display movie information.
+- build component to display review about movie.
 
 ## Advances
 * installed react-router-dom 
@@ -16,6 +16,7 @@
 * succesfully retrieved movie list
 * successfully made post request to token auth endpoint and set state
 * successfully dispatched action to clear state
+* successfully incorporated AppRouter
 
 
 ## Available Scripts

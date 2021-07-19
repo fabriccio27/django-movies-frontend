@@ -10,14 +10,14 @@ import {Route, Redirect} from "react-router-dom";
 export const PublicRoute = ({isAuthenticated, component:Component, ...rest}) => (
     <Route {...rest} component={(props)=>{
         return isAuthenticated? 
-        ( <Redirect to="/dashboard" /> ) 
+        ( <Redirect to="/dashboard/" /> ) 
         : ( <Component {...props} /> );
     }}/>
 )
 
 const mapStateToProps = (state)=>{
     return {
-        isAuthenticated:!!state.auth.uid
+        isAuthenticated:state.auth.isAuthenticated
         //esto lo hacia para convertir la existencia o ausencia de un string en un booleano
         //si state.auth.uid es undefined un !, lo hace true, y !! lo hace false
         //si state.auth.uid es un string, !lo hace false, y !! lo hace true

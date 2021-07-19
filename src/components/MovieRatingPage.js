@@ -34,7 +34,9 @@ class MovieRatingPage extends React.Component {
     }
     render(){
         return(
-            /* info de pelicula y abajo ratings pero utilizando componentes creo */
+            /* info de pelicula y abajo ratings pero utilizando componentes creo 
+            tambien poner formulario para añadir critica a esta pelicula 
+            o redirecciona a pagina donde pueda escribir critica para esta pelicula*/
             <div>
                 <h1>{this.state.movie.title}</h1>
                 {this.state.ratings.map(rating=>{
