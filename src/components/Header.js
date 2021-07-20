@@ -10,7 +10,7 @@ export const Header = ({isAuthenticated, logUserOut, userId}) => (
             <MovieIcon/>        
             <NavLink to="/dashboard" activeClassName="selected">Home</NavLink>
             {isAuthenticated && <NavLink to={`/watchlist/${userId}`} activeClassName="selected">Watchlist</NavLink>}
-            {isAuthenticated && <button onClick={()=>logUserOut()}>Log Out</button>}
+            {isAuthenticated && <button className="logout-btn" onClick={()=>logUserOut()}>Log Out</button>}
             {!isAuthenticated && <NavLink to="/login" activeClassName="selected">Login</NavLink>}
             {!isAuthenticated && <NavLink to="/register" activeClassName="selected">Register</NavLink>}
         </nav>

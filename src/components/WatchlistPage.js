@@ -42,7 +42,7 @@ class WatchlistPage extends React.Component {
             return movie.id!=targetId; //si tiene id distinto al target, queda
         });
         const url = `http://localhost:8000/api/users/${this.state.userId}/watchlist/`;
-        fetch(url, {signal:this.abortController.signal}, {
+        fetch(url, {
             method:"PUT",
             headers:{
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ class WatchlistPage extends React.Component {
         })
         .then(resp=>resp.json())
         .then(data=>{
-            console.log(data);
+            console.log(`This came back from the put request ${data}`);
             this.setState(()=>({
                 watchlist:newWatchlist
             }))

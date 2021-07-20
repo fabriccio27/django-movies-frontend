@@ -7,7 +7,7 @@ const WatchlistCard =({movie, owner, handleRemoveFromWl, isAuthenticated})=>{
     return(
         <div>
             <MovieCard movie={movie} /> 
-            {owner && isAuthenticated && <button onClick={()=>handleRemoveFromWl(movie.id)}>Remove from watchlist</button>}
+            {owner && isAuthenticated && <button className="btn btn-danger" onClick={()=>handleRemoveFromWl(movie.id)}>Remove from watchlist</button>}
         </div>
         
         

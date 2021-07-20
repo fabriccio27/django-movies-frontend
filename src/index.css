@@ -37,3 +37,15 @@ code {
 .loading-img {
   width:auto
 }
+.login-btn-div {
+  display:flex;
+  padding:2rem;
+  justify-content: center;
+  align-items: center;
+}
+.logout-btn {
+  background-color: transparent;
+  border:none;
+  color:antiquewhite;
+  font-weight:bold;
+}

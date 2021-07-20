@@ -10,7 +10,6 @@ import NotFoundPage from "../components/NotFoundPage";
 import LoginPage from "../components/LoginPage";
 import RegisterPage from "../components/RegisterPage";
 import { createBrowserHistory } from 'history';
-//import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
 
@@ -30,9 +29,9 @@ const AppRouter = () =>(
                 <Route path="/watchlist/:userId" component={WatchlistPage}/>
                 <PublicRoute exact={true} path="/register/" component={RegisterPage}/>
                 <PublicRoute exact={true} path="/login/" component={LoginPage}/>
-                {/* <PrivateRoute exact={true} path="/create" component={AddExpensePage} />
-                <PrivateRoute path="/edit/:id" component={EditExpensePage} /> */}
-                <Route component={NotFoundPage} /> {/* with Switch and no path defined, this will run if there's no match for any of the routes above */}
+                
+                <Route component={NotFoundPage} /> 
+                {/* with Switch and no path defined, this will run if there's no match for any of the routes above */}
             </Switch>
                 
         </div>
