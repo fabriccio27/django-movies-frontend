@@ -41,7 +41,7 @@ class MovieDetailPage extends React.Component {
     }
     handleAddToWl(){
         const url = `http://localhost:8000/api/users/${this.props.currentUserId}/watchlist/`;
-        fetch(url, {signal:this.abortController.signal},{
+        fetch(url, {signal:this.abortController.signal}, {
             method:"POST",
             headers:{
                 "Content-Type": "application/json",
@@ -76,7 +76,7 @@ class MovieDetailPage extends React.Component {
         return(
             <div>
                 <h1>{this.state.movie.title}</h1><span>{this.state.movie.average_rating} <StarBorderIcon/></span>
-                {this.props.isAuthenticated && <button className="btn btn-pri" onClick={this.handleAddToWl}>Add to Watchlist</button>}
+                {this.props.isAuthenticated && <button className="btn btn-success" onClick={this.handleAddToWl}>Add to Watchlist</button>}
                 <h2>Release date: {this.state.movie.release}</h2>
                 <p>Genre: {this.state.movie.genre.charAt(0).toUpperCase() + this.state.movie.genre.slice(1)}</p>
                 <p>{this.state.movie.plot}</p>

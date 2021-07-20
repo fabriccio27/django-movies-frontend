@@ -2,7 +2,6 @@ import thunk from "redux-thunk";
 import {createStore, combineReducers, applyMiddleware} from "redux";
 import { composeWithDevTools } from 'redux-devtools-extension';
 import expensesReducer from "../reducers/expenses";
-import pruebasReducer from "../reducers/pruebas";
 //import filtersReducer from "../reducers/filters";
 import authReducer from "../reducers/auth";
 
@@ -14,7 +13,6 @@ const storeGenerator =()=>{
         combineReducers({
             expenses:expensesReducer,
             //filter:filtersReducer,
-            pruebas:pruebasReducer,
             auth:authReducer
         }),
         composeWithDevTools(applyMiddleware(thunk)));

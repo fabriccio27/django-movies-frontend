@@ -1,5 +1,5 @@
 # Plan
-- check if I can retrieve/push data from django backend API
+- check if I can retrieve/push data from django backend API.
     - GET request for movie list.
     - POST request to register user.
     - POST request to add movie review with valid credentials
@@ -21,6 +21,7 @@
 * successfully incorporated AppRouter
 * successfully added header/navbar
 * successfully retrieved movie details.
+* successfully redirected from Watchlist at logout.
 
 
 ## Available Scripts

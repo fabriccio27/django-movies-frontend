@@ -2,10 +2,12 @@ import React from "react";
 import {NavLink} from "react-router-dom";
 import {logUserOut} from "../actions/authActions";
 import {connect} from "react-redux";
+import MovieIcon from '@material-ui/icons/Movie';
 
 export const Header = ({isAuthenticated, logUserOut, userId}) => (
     <header>
-        <nav>
+        <nav className="navbar">
+            <MovieIcon/>        
             <NavLink to="/dashboard" activeClassName="selected">Home</NavLink>
             {isAuthenticated && <NavLink to={`/watchlist/${userId}`} activeClassName="selected">Watchlist</NavLink>}
             {isAuthenticated && <button onClick={()=>logUserOut()}>Log Out</button>}

@@ -1,5 +1,6 @@
 import React from "react";
-import { connect} from "react-redux";
+import {connect} from "react-redux";
+import { Redirect } from "react-router";
 //import MovieCard from "./MovieCard";
 import WatchlistCard from "./WatchlistCard";
 
@@ -61,7 +62,12 @@ class WatchlistPage extends React.Component {
         })
         .catch(err=>console.log(`This happened while trying to update watchlist: ${err}`))
     }
+
+
     render(){
+        if (!this.props.isAuthenticated){
+            return <Redirect to="/dashboard" />
+        }
         if (this.state.watchlist.length===0){
             return <h2>Your watchlist is empty</h2>
         }
@@ -80,8 +86,9 @@ class WatchlistPage extends React.Component {
 
 const mapStateToProps = (state) =>{
     return {
-        username:state.auth.user_info["username"],
-        currentUserId:state.auth.user_info["user_id"]
+        username: state.auth.user_info["username"],
+        currentUserId: state.auth.user_info["user_id"],
+        isAuthenticated: state.auth.isAuthenticated
     }
 }
 
