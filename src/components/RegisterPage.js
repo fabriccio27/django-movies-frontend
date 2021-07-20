@@ -64,7 +64,7 @@ class RegisterPage extends React.Component {
         }
         return(
             <div className="form-div">
-                {this.state.error && <h4 className="register-message">{this.state.error}</h4>}
+                {this.state.error && <h4 className="form-message">{this.state.error}</h4>}
                 <form onSubmit={this.handleOnSubmit}>
                     <div className="form-group">
                         <label htmlFor="username"></label>

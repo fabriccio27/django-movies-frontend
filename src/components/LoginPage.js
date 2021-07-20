@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {fetchUser, setUser} from '../actions/authActions';
+import {setUser} from '../actions/authActions';
 
 
 class LoginPage extends React.Component {
@@ -53,8 +53,8 @@ class LoginPage extends React.Component {
     render(){
 
         return(
-            <div>
-                {this.state.error && <h4>{this.state.error}</h4>}
+            <div className="form-div">
+                {this.state.error && <h4 className="form-message">{this.state.error}</h4>}
                 <form onSubmit={this.handleOnSubmit}>
                     <div className="form-group">
                         <label htmlFor="logUsername"></label>

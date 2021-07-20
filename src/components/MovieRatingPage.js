@@ -7,12 +7,17 @@ import { withRouter } from "react-router";
 
 /* aca voy a llegar mediante movies/someid, en el componente accedo haciendo match.params.someid */
 class MovieRatingPage extends React.Component {
-    state = {
-        movie_id:this.props.match.params["movieId"],
-        movie:{},
-        ratings:[],
-        needToRefresh:false
+    constructor(props){
+        super(props);
+        this.state = {
+            movie_id:this.props.match.params["movieId"],
+            movie:{},
+            ratings:[],
+            needToRefresh:false
+        };
+        this.activateRefresh = this.activateRefresh.bind(this);
     }
+        
 
     abortController = new AbortController();
 
@@ -56,10 +61,12 @@ class MovieRatingPage extends React.Component {
         const no_components = <h2>There's no ratings for this movie yet, be on the avant!</h2>
 
         return(
-            <div>
+            <div className="movie-ratings-container">
                 <h1>Reviews for {this.state.movie.title}</h1>
                 {/* <button onClick={this.toggleShowForm}>Write your review</button> */}
-                {this.props.isAuthenticated?(<RatingForm movieId={this.state.movie_id} activateRefresh={this.activateRefresh}/>):(<h2>Log in to write a review</h2>)}
+                {this.props.isAuthenticated?
+                (<RatingForm movieId={this.state.movie_id} activateRefresh={this.activateRefresh}/>)
+                :(<h2>Log in to write a review</h2>)}
                 {this.state.ratings.length===0?(no_components):(rating_components)}
             </div>
         )
@@ -70,7 +77,7 @@ const mapStateToProps = (state) =>{
     // tengo state.pruebas, state.auth, state.expenses segun lo que puse en configureStore
     return {
         isAuthenticated: state.auth.isAuthenticated
-        /* despues accederia en jsx como this.props.creador */
+        
     }
 }
 

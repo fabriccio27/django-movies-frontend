@@ -1,15 +1,15 @@
 import React, {useState} from "react";
+//import { Redirect } from "react-router";
 
 const RatingForm = ({movieId, activateRefresh})=>{
     const [rating, setRating] =  useState(3);
     const [comment, setComment] = useState("");
-    const [success, setSuccess] = useState(false);
-    console.log(activateRefresh);
+    const [submitted, setSubmitted] = useState(false);
+    const [error, setError] = useState("");
 
     const handleOnSubmit=(ev)=>{
-        ev.preventDefault();
-        console.log(localStorage.getItem("token"));
-        /* pepe argento f44d5d469278e613747ccaa647e0b92c81082fc7*/
+        ev.preventDefault(); //el refresh me desloguea
+    
         const url = `http://localhost:8000/api/movies/${movieId}/ratings/`;
         fetch(url, {
             method:"POST",
@@ -26,7 +26,12 @@ const RatingForm = ({movieId, activateRefresh})=>{
         .then(res=>res.json()) /* si es exitoso devuelve la info completa de la review, userid, movieid, etc. */
         .then(data=>{
             console.log(data);
-            setSuccess(true);
+            if (data.hasOwnProperty("movie") || data.hasOwnProperty("rating")){
+                setSubmitted(true);
+            } else {
+                setError(data.comment[0]);
+            }
+            
         })
         .catch(err=>{
             console.log(`This happened while trying to create review: ${err}`);
@@ -41,17 +46,19 @@ const RatingForm = ({movieId, activateRefresh})=>{
         setRating(parseInt(ev.target.value))
     }
     
-    if(success){
-        return <h2>Great! we received your review.</h2>
+    if(submitted){
+        return <h3>Thanks for your review!</h3>
     }
 
     return(
         <form onSubmit={handleOnSubmit} className="review-form">
-            <div className="form-group col-2" >
+            
+            <div className="form-group col-6 col-md-3" >
                 <label htmlFor="ratingField">Rating</label>
                 <input type="number" value={rating} onChange={handleRatingChange} min={1} max={5} id="ratingField" className="form-control"/>
                 <small className="form-text text-muted">1 to 5 stars</small>
             </div>
+            <h4 className="form-message">{error}</h4>
             <div className="form-group">
                 <label htmlFor="commentField">Review</label>
                 <textarea 
@@ -59,7 +66,7 @@ const RatingForm = ({movieId, activateRefresh})=>{
                     onChange={handleOnCommentChange} 
                     maxLength={500} 
                     placeholder="Did you like it?"
-                    rows={10} 
+                    rows={7} 
                     cols={40} 
                     className="form-control"
                     id="commentField"
