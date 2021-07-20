@@ -21,16 +21,13 @@ code {
   margin:0;
   overflow-y: scroll;
 }
-.selected {
-  font-weight: bolder;
-}
+
 
 .review-form {
   width:60%;
 }
 .navbar {
   margin:0 auto;
-  /* width:60%; */
   display:flex;
   justify-content: space-evenly;
 }
@@ -48,4 +45,18 @@ code {
   border:none;
   color:antiquewhite;
   font-weight:bold;
+}
+.logout-btn:hover{
+  color:brown;
+}
+.selected {
+  font-weight: bolder;
+}
+
+.card-text {
+  color:orangered;
+  font-weight:bold;
+  font-size:1.1rem;
+  display: flex;
+  align-items: center;
 }

@@ -1,7 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
 import { Redirect } from "react-router";
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
+import LoadingPage from "./LoadingPage";
+
 
 class MovieDetailPage extends React.Component {
     constructor(props){
@@ -32,7 +34,6 @@ class MovieDetailPage extends React.Component {
                     error:data.detail
                 }))
             }
-            
         })
         .catch(err=>console.log(`This happened while trying to fetch movie details: ${err}`))
     }
@@ -56,13 +57,18 @@ class MovieDetailPage extends React.Component {
                 movie_id:this.state.movieId
             })
         })
-        .then(resp=>resp.json())
+        .then(resp=>{
+            console.log(resp.status)
+            return resp.json()
+        })
         .then(data=>{
             if (data.hasOwnProperty("success")){
                 this.setState(()=>({
-                    addedToWl:true
+                    addedToWl:true 
                 }))
+                /* esto me va a disparar redirect a watchlist */
             }else{
+                console.log(`Esta es la rama else de solicitud de agregado: ${data}`);
                 this.setState(()=>({
                     error:data["message"]
                 }));
@@ -82,17 +88,17 @@ class MovieDetailPage extends React.Component {
     
     render(){
         if (this.isEmpty(this.state.movie)) {
-            return <h2>Fetching movie data...</h2>
-        } else if (this.state.error){
-            return <h2>Not Found</h2>
+            return <LoadingPage/>
         } else if (this.state.addedToWl){
             return <Redirect to={`/watchlist/${this.props.currentUserId}`} />
         }
+
         return(
             <div>
-                <h1>{this.state.movie.title}</h1><span>{this.state.movie.average_rating} <StarBorderIcon color="secondary"/></span>
-                {this.state.error!=="" && <h3>{this.state.error}</h3>}
-                {this.props.isAuthenticated && <button className="btn btn-success" onClick={this.handleAddToWl}>Add to Watchlist</button>}
+                <h1>{this.state.movie.title}</h1>
+                <span>{this.state.movie.average_rating} <StarIcon color="secondary"/></span>
+                {this.state.error!=="" && <h3 style={{"color":"crimson"}}>{this.state.error}</h3>}
+                {this.props.isAuthenticated &&  !this.state.error && <button className="btn btn-success" onClick={this.handleAddToWl}>Add to Watchlist</button>}
                 <h2>Release date: {this.state.movie.release}</h2>
                 <p>Genre: {this.state.movie.genre.charAt(0).toUpperCase() + this.state.movie.genre.slice(1)}</p>
                 <p>{this.state.movie.plot}</p>
@@ -111,3 +117,6 @@ const mapStateToProps = (state) =>{
 }
 
 export default connect(mapStateToProps)(MovieDetailPage);
+
+/* } else if (this.state.error==="Movie already in watchlist"){
+            return <h2>{this.state.error}</h2> */
