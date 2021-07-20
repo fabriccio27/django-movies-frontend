@@ -1,11 +1,13 @@
 import React from "react";
 import {connect} from 'react-redux';
-import {fetchUser, logUserOut} from '../actions/authActions';
+import {fetchUser, setUser} from '../actions/authActions';
+
 
 class LoginPage extends React.Component {
     state = {
         username: "",
-        password: ""
+        password: "",
+        error:this.props.error
     }
     handleOnChange = (e) => {
         e.persist();
@@ -15,14 +17,44 @@ class LoginPage extends React.Component {
     }
 
     handleOnSubmit = (e) => {
-        e.preventDefault()
-        this.props.fetchUser(this.state)
+        e.preventDefault();
+        fetch(`http://localhost:8000/api/api-token-auth/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                username:this.state.username,
+                password:this.state.password
+            })
+        })
+        .then(res => {
+            console.log(res.status)
+            return res.json()
+        })
+        .then(data => {
+            
+            if (data.hasOwnProperty("token")){
+                localStorage.setItem("token", data.token);
+                this.props.setUser(data.user_info);
+            }else{
+                console.log(data.error);
+                this.setState(()=>({
+                    error:data.error
+                }))
+            }
+
+        })
+        .catch(err=>console.log(`This happened while trying to authenticate: ${err}`))
+        
     }
     
     render(){
 
         return(
             <div>
+                {this.state.error && <h4>{this.state.error}</h4>}
                 <form onSubmit={this.handleOnSubmit}>
                     <div className="form-group">
                         <label htmlFor="logUsername"></label>
@@ -48,7 +80,7 @@ class LoginPage extends React.Component {
                             className="form-control"
                         />
                     </div>
-                    <div className="login-btn-div"> 
+                    <div className="form-btn-div"> 
                         <button type="submit" className="btn btn-primary login-btn"> Log In </button>
                     </div>
                 </form>
@@ -63,8 +95,7 @@ class LoginPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchUser: (userInfo) => dispatch(fetchUser(userInfo)),
-        logUserOut: () => dispatch(logUserOut())
+        setUser: (userInfo) => dispatch(setUser(userInfo))
     }
 }
 

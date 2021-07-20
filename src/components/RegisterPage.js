@@ -1,7 +1,5 @@
 import React from "react";
 
-
-
 class RegisterPage extends React.Component {
     state = {
         username: "",
@@ -21,7 +19,6 @@ class RegisterPage extends React.Component {
     handleOnSubmit = (ev) =>{
         const url = `http://localhost:8000/api/users/register/`;
         ev.preventDefault()
-        console.log("trying to submit registration form");
         /* make post request */
         fetch(url, {
             method:"POST",
@@ -55,7 +52,6 @@ class RegisterPage extends React.Component {
         })
         .catch(err=>console.log(`This happened while trying to register user:${err}`))
         /* 400 no me tira para este lado, por eso tengo condicional en then anterior */
-        
     }
 
     render(){
@@ -67,38 +63,60 @@ class RegisterPage extends React.Component {
             )
         }
         return(
-            <div>
-                {this.state.error && <h2>{this.state.error}</h2>}
+            <div className="form-div">
+                {this.state.error && <h4 className="register-message">{this.state.error}</h4>}
                 <form onSubmit={this.handleOnSubmit}>
-                    <input 
+                    <div className="form-group">
+                        <label htmlFor="username"></label>
+                        <input 
                         type="text" 
                         placeholder="Username" 
-                        name="username" 
+                        name="username"
+                        id="username"
                         value={this.state.username}
                         onChange={this.handleOnChange}
-                    />
-                    <input 
+                        className="form-control"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="password"></label>
+                        <input 
                         type="password" 
                         placeholder="Password" 
                         name="password" 
+                        id="password"
                         value={this.state.password}
                         onChange={this.handleOnChange}
-                    />
-                    <input 
+                        className="form-control"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor=""></label>
+                        <input 
                         type="password" 
-                        placeholder="Confirm Password" 
+                        placeholder="Confirm Password"
+                        id="password2"
                         name="password2" 
                         value={this.state.password2}
                         onChange={this.handleOnChange}
-                    />
-                    <input 
+                        className="form-control"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="email"></label>
+                        <input 
                         type="email" 
                         placeholder="Email (optional)" 
                         name="email" 
+                        id="email"
                         value={this.state.email}
                         onChange={this.handleOnChange}
-                    />
-                    <input type="submit" value="Register"/>
+                        className="form-control"
+                        />
+                    </div>
+                    <div className="form-btn-div">
+                        <button type="submit" className="btn btn-dark">Register</button>
+                    </div>
                 </form>
                 
             </div>

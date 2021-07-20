@@ -11,6 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 #root {
   background-color: rgb(18, 29, 29);
   height:100vh;
@@ -26,6 +27,9 @@ code {
 .review-form {
   width:60%;
 }
+.form-div {
+  width:350px;
+}
 .navbar {
   margin:0 auto;
   display:flex;
@@ -34,7 +38,7 @@ code {
 .loading-img {
   width:auto
 }
-.login-btn-div {
+.form-btn-div {
   display:flex;
   padding:2rem;
   justify-content: center;
@@ -59,4 +63,10 @@ code {
   font-size:1.1rem;
   display: flex;
   align-items: center;
+}
+
+.register-message {
+  width:300px;
+  color:orange;
+  text-align:"center"
 }

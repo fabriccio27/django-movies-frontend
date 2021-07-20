@@ -7,7 +7,8 @@ Esto devuelve el endpoint de token
 'username':user.username,
 'email': user.email */
 
-const setUser = (payload) => ({ type: "LOGIN", payload})
+export const setUser = (payload) => ({ type: "LOGIN", payload})
+const setError = (payload) => ({ type: "SET_ERROR", payload})
 
 export const logUserOut = () => ({type: "LOGOUT"})
 
@@ -25,9 +26,17 @@ export const fetchUser = (userInfo) => dispatch => {
     })
     .then(res => res.json())
     .then(data => {
-        localStorage.setItem("token", data.token)
-        dispatch(setUser(data.user_info))
+        /* console.log(data); */
+        if (data.hasOwnProperty("token")){
+            localStorage.setItem("token", data.token);
+            dispatch(setUser(data.user_info));
+        }else{
+            console.log(data.error);
+            dispatch(setError(data["error"]))
+        }
+        
     })
+    .catch(err=>console.err(`This happened while trying to authenticate: ${err}`))
     //QUE PASA SI LAS CREDENCIALES SON INVALIDAS?
 }
 
