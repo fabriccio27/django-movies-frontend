@@ -1,6 +1,9 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import LoadingPage from "./LoadingPage";
+import {connect} from "react-redux";
+import AddIcon from '@material-ui/icons/Add';
+import {Link} from "react-router-dom";
 
 class MovieDashboardPage extends React.Component {
    state = {
@@ -48,7 +51,12 @@ class MovieDashboardPage extends React.Component {
       
       return(
         <div>
-          <h1>Movie List</h1>
+          <div className="dashboard-title">
+            <h1>Movie List</h1>
+            {this.props.isAuthenticated && <Link to="/add-movie"><AddIcon fontSize="large"/></Link>}
+          </div>
+          
+          
           <p>
             <button className="btn btn-outline-success" onClick={this.sortByDate}>Sort by release date</button>
             <button className="btn btn-outline-success" onClick={this.sortByRating}>Sort by rating</button>
@@ -59,6 +67,11 @@ class MovieDashboardPage extends React.Component {
         </div>
       )
     }
-  }
+}
 
-export default MovieDashboardPage;
+const mapStateToProps = (state) =>{
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+}
+export default connect(mapStateToProps)(MovieDashboardPage);

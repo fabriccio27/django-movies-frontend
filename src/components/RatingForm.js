@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 //import { Redirect } from "react-router";
 
-const RatingForm = ({movieId, activateRefresh})=>{
+const RatingForm = ({movieId})=>{
     const [rating, setRating] =  useState(3);
     const [comment, setComment] = useState("");
     const [submitted, setSubmitted] = useState(false);
@@ -36,7 +36,7 @@ const RatingForm = ({movieId, activateRefresh})=>{
         .catch(err=>{
             console.log(`This happened while trying to create review: ${err}`);
         });
-        /* hacer cosas para hacer post request, aca creo que necesito el token */
+        
     }
     const handleOnCommentChange=(ev)=>{
         ev.persist();
@@ -47,7 +47,12 @@ const RatingForm = ({movieId, activateRefresh})=>{
     }
     
     if(submitted){
-        return <h3>Thanks for your review!</h3>
+        return (
+            <React.Fragment>
+                <h3>Thanks for your review!</h3>
+                <h2>Continue exploring the site.</h2>
+            </React.Fragment>
+        )
     }
 
     return(

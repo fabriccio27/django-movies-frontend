@@ -65,8 +65,8 @@ class MovieRatingPage extends React.Component {
                 <h1>Reviews for {this.state.movie.title}</h1>
                 {/* <button onClick={this.toggleShowForm}>Write your review</button> */}
                 {this.props.isAuthenticated?
-                (<RatingForm movieId={this.state.movie_id} activateRefresh={this.activateRefresh}/>)
-                :(<h2>Log in to write a review</h2>)}
+                (<RatingForm movieId={this.state.movie_id}/>)
+                :(<h2 style={{"color":"darkgreen"}}>Log in to write a review</h2>)}
                 {this.state.ratings.length===0?(no_components):(rating_components)}
             </div>
         )

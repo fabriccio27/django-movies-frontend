@@ -11,17 +11,17 @@ export const PrivateRoute = ({isAuthenticated, component:Component, ...rest}) =>
         return isAuthenticated? 
         (
             <div>
-                <Header />
+                
                 <Component {...props}/>
             </div>
         ) 
-        : (<Redirect to="/"/>);
+        : (<Redirect to="/login"/>);
     }}/>
 )
 
 const mapStateToProps = (state)=>{
     return {
-        isAuthenticated:!!state.auth.uid
+        isAuthenticated:state.auth.isAuthenticated
         //esto lo hacia para convertir la existencia o ausencia de un string en un booleano
         //si state.auth.uid es undefined un !, lo hace true, y !! lo hace false
         //si state.auth.uid es un string, !lo hace false, y !! lo hace true

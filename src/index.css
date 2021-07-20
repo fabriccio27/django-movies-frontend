@@ -82,3 +82,18 @@ code {
 .movie-detail-container, .movie-ratings-container {
   max-width:80vw;
 }
+
+.rating-card {
+  margin:1.2rem 0;
+}
+.dashboard-title {
+  display:flex;
+  align-items: center;
+}
+.dashboard-title a {
+  text-decoration: none;
+}
+.dashboard-title a:hover {
+  color:rgb(19, 184, 69);
+  font-weight:bold;
+}

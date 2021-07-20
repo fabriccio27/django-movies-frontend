@@ -64,7 +64,7 @@ class RegisterPage extends React.Component {
         }
         return(
             <div className="form-div">
-                {this.state.error && <h4 className="form-message">{this.state.error}</h4>}
+                <h4 className="form-message">{this.state.error}</h4>
                 <form onSubmit={this.handleOnSubmit}>
                     <div className="form-group">
                         <label htmlFor="username"></label>
@@ -91,7 +91,7 @@ class RegisterPage extends React.Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor=""></label>
+                        <label htmlFor="password2"></label>
                         <input 
                         type="password" 
                         placeholder="Confirm Password"
