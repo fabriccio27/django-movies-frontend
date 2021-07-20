@@ -58,11 +58,19 @@ code {
 .selected {
   font-weight: bolder;
 }
-
+.wl-card-container {
+  display:flex;
+  align-items: center;
+  max-width:80vw;
+}
+.remove-wl-btn {
+  border-radius: 50%;
+  margin:1rem;
+}
 .card-text {
   color:orangered;
   font-weight:bold;
-  font-size:1.1rem;
+  font-size:1.2rem;
   display: flex;
   align-items: center;
   padding:0.5rem 0;

@@ -96,8 +96,8 @@ class MovieDetailPage extends React.Component {
         return(
             <div className="movie-detail-container">
                 <h1 className="movie-detail-title">{this.state.movie.title}</h1>
-                <div>
-                    <span>{this.state.movie.average_rating} <StarIcon color="secondary"/></span>
+                <div className="card-text">
+                    <span>{this.state.movie.average_rating} <StarIcon/></span>
                 </div>
                 {this.state.error!=="" && <h3 style={{"color":"crimson"}}>{this.state.error}</h3>}
                 {this.props.isAuthenticated &&  !this.state.error && <button className="btn btn-success" onClick={this.handleAddToWl}>Add to Watchlist</button>}

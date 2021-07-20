@@ -1,11 +1,9 @@
-import moment from "moment";
+
 //quiero que tome de startDate y endDate los extremos del mes corriente
 
 const filReducerDefaultState = {
     text:"",
-    sortBy:"date",
-    startDate:moment().startOf("month"),
-    endDate:moment().endOf("month")
+    year:"1991"
 };
 const filtersReducer = (state=filReducerDefaultState, action) =>{
     switch(action.type){
@@ -14,25 +12,10 @@ const filtersReducer = (state=filReducerDefaultState, action) =>{
                 ...state,
                 text:action.text
             };
-        case "SORT_BY_AMOUNT":
+        case "SET_YEAR":
             return {
                 ...state,
-                sortBy:"amount"
-            };
-        case "SORT_BY_DATE":
-            return {
-                ...state,
-                sortBy:"date"
-            };
-        case "SET_START_DATE":
-            return {
-                ...state,
-                startDate:action.startDate
-            };
-        case "SET_END_DATE":
-            return {
-                ...state,
-                endDate:action.endDate
+                year:action.year
             };
         default:
             return state;
