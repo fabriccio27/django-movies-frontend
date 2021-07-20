@@ -1,15 +1,21 @@
+# Summary
+
+This frontend app used `react-router-dom` to enable client-side navigation, `react-redux` and `redux` to handle some state throughout the whole app. At this stage, I decided to use state to only keep track of auth state, that is which user is logged, and get the movie data through API calls. Authentication process is via token, as I've always used basic authentication (username and password), and decided I was a good time to put something new into practice. To add icons I chose the `material-ui` library (also something new to me, as I frequently use fontAwesome as my source of icons). To handle date format I decided to use the `luxon` library, as the team behind `moment.js` recommended it for newer projects. Initially I considered having more state management through redux, and considering the amount of AJAX used, I installed `redux-thunk` to dispatch actions, but as I moved into the project I wasn't sure if that was the right path. I might refactor this whole app with fresh eyes.
+Clean up for asynchronous project can definitely be improved.
+The app is loaded from `index.js` which imports the `AppRouter`.
+
 # Plan
 - check if I can retrieve/push data from django backend API.
     - GET request for movie list.
     - POST request to register user.
-    - POST request to add movie review with valid credentials
+    - POST request to add movie review with valid credentials.
 - think about how the state will be configured
     - token
     - ~~movie list~~
     - user id
 - think how many 'pages' will be needed.
 - build card component or something to display movie information.
-- build component to display review about movie.
+- build component to display reviews about movie.
 
 ## Advances
 * installed react-router-dom. 
