@@ -7,47 +7,50 @@ import {Link} from "react-router-dom";
 
 class MovieDashboardPage extends React.Component {
    state = {
-        token:"",
-        user_id:"",
-        movies:[],
-        sorting:"average_rating"
-    }
+        token: "",
+        user_id: "",
+        movies: [],
+        sorting: "average_rating"
+    };
   
     abortController = new AbortController();
   
-    componentDidMount(){
+    componentDidMount() {
       // aca tengo que buscar recursos de drf API
       // http://localhost:8000/api/movies/
-      console.log("Componente app montado");
       fetch('http://localhost:8000/api/movies/', {signal:this.abortController.signal})
         .then(results => results.json())
         .then(data =>{
-          this.setState(()=>{
+          this.setState(() => {
             return {
               movies:data
             }
           })
         })
-        .catch(err=>console.log(`This happened while trying to fetch movie list: ${err}`))
+        .catch(err => console.log(`This happened while trying to fetch movie list: ${err}`))
     }
 
-    componentWillUnmount(){
-      console.log("Componente desmontado");
-      this.abortController.abort()
+    componentWillUnmount() {
+      this.abortController.abort();
     }
 
-    sortByDate=()=>this.setState(()=>({sorting:"release"}))
-    sortByRating=()=>this.setState(()=>({sorting:"average_rating"}))
+    sortByDate = () => this.setState(()=>({sorting:"release"}));
+    sortByRating = () => this.setState(()=>({sorting:"average_rating"}));
 
-    render(){
+    render() {
 
-      if (this.state.movies.length===0){
-        return <LoadingPage />
+      if (this.state.movies.length === 0){
+        return (
+          <>
+            <h2>There are no movie reviews yet!</h2>
+            <LoadingPage />
+          </>
+        );
       }
 
-      const moviesSorted = this.state.movies.sort((a,b)=>{
-        return a[this.state.sorting]<b[this.state.sorting]?1:-1
-      })
+      const moviesSorted = this.state.movies.sort((a,b )=> {
+        return a[this.state.sorting] < b[this.state.sorting] ? 1 : -1;
+      });
       
       return(
         <div>
@@ -65,13 +68,13 @@ class MovieDashboardPage extends React.Component {
             return <MovieCard key={movie.id} movie={movie}/>
           })}
         </div>
-      )
+      );
     }
 }
 
 const mapStateToProps = (state) =>{
   return {
     isAuthenticated: state.auth.isAuthenticated
-  }
-}
+  };
+};
 export default connect(mapStateToProps)(MovieDashboardPage);

@@ -16,8 +16,8 @@ import PrivateRoute from "./PrivateRoute";
 
 
 export const history =  createBrowserHistory(); 
-//si uso Router en lugar de BrowserRouter, le puedo pasar mi instancia de history
-//quiero que me deje ir a LoginPage solo si no estoy authenticado, si no que me redirija a dashboard
+// si uso Router en lugar de BrowserRouter, le puedo pasar mi instancia de history
+// quiero que me deje ir a LoginPage solo si no estoy autenticado, si no que me redirija a dashboard
 const AppRouter = () =>(
 
     <Router history={history}>
@@ -32,13 +32,10 @@ const AppRouter = () =>(
                 <Route path="/watchlist/:userId" component={WatchlistPage}/>
                 <PublicRoute exact={true} path="/register/" component={RegisterPage}/>
                 <PublicRoute exact={true} path="/login/" component={LoginPage}/>
-                
+                {/* NotFoundPage deberia renderizar si no hay match para ninguna de las rutas de arriba */}
                 <Route component={NotFoundPage} /> 
-                {/* with Switch and no path defined, this will run if there's no match for any of the routes above */}
             </Switch>
-                
         </div>
-        
     </Router>
 );
 

@@ -4,9 +4,9 @@ import {Route, Redirect} from "react-router-dom";
 
 
 
-//...rest es una teje para nombrar en el destructurado lo que nombre explicitamente, o sea, 
-//...rest es todo lo que no es isAuthenticated y component en props. (exact, path, history, etc)
-//component:Component es ponerle alias Component a la prop que venia llamandose component
+// ...rest es una teje para nombrar en el destructurado lo que nombre explicitamente, o sea, 
+// ...rest es todo lo que no es isAuthenticated y component en props. (exact, path, history, etc)
+// component:Component es ponerle alias Component a la prop que venia llamandose component
 export const PublicRoute = ({isAuthenticated, component:Component, ...rest}) => (
     <Route {...rest} component={(props)=>{
         return isAuthenticated? 
